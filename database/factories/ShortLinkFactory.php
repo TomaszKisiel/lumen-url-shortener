@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\ShortLink;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UrlFactory extends Factory
+class ShortLinkFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -22,7 +22,7 @@ class UrlFactory extends Factory
     public function definition()
     {
         return [
-            'url' => $this->faker->url,
+            'original_url' => $this->faker->url,
         ];
     }
 }

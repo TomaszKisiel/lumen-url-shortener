@@ -13,15 +13,16 @@
 |
 */
 
-$router->get( '/{hash}', \ShortLinkController::class );
-$router->post( '/{hash}', \ShortLinkController::class );
-$router->put( '/{hash}', \ShortLinkController::class );
-$router->patch( '/{hash}', \ShortLinkController::class );
-$router->delete( '/{hash}', \ShortLinkController::class );
-$router->head( '/{hash}', \ShortLinkController::class );
-$router->options( '/{hash}', \ShortLinkController::class );
+$router->get( '/{link}', \ShortLinkController::class );
+$router->post( '/{link}', \ShortLinkController::class );
+$router->put( '/{link}', \ShortLinkController::class );
+$router->patch( '/{link}', \ShortLinkController::class );
+$router->delete( '/{link}', \ShortLinkController::class );
+$router->head( '/{link}', \ShortLinkController::class );
+$router->options( '/{link}', \ShortLinkController::class );
 
-$router->get( '/', 'HomeController@index' );
-$router->post( '/', 'HomeController@store' );
+$router->get( '/', 'DashboardController@index' );
+$router->post( '/', 'DashboardController@store' );
+
 
 

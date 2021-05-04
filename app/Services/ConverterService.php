@@ -3,12 +3,12 @@
 
 namespace App\Services;
 
+use InvalidArgumentException;
+
 /**
  * Czterocyfrowe skróty skończą się po ZZZZ ( 14_776_335 )
  * Czternaście milionów siedemset siedemdziesiąt sześć tysięcy trzysta trzydzieści pięć
- *
- * Class UrlConverter
- * @package App\Actions
+ * @package App\Services
  */
 class ConverterService {
 
@@ -46,11 +46,9 @@ class ConverterService {
             return chr( ord( "a" ) + ( $num - 10 ) );
         }
 
-        if ( $num >= 36 && $num < 62 ) {
+//        if ( $num >= 36 && $num < 62 ) {
             return chr( ord( "A" ) + ( $num - 36 ) );
-        }
-
-        return "";
+//        }
     }
 
     private function convertDuosexagesimal( $num ) {
@@ -66,7 +64,7 @@ class ConverterService {
             return 36 + ( ord( $num ) - ord( "A" ) );
         }
 
-        return 0;
+        throw new InvalidArgumentException("Function accepts only duosexagesimal formatted arguments, 0-9, a-z and A-Z only.");
     }
 
 }

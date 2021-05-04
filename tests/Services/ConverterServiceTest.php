@@ -1,8 +1,10 @@
 <?php
+namespace Services;
 
-use Laravel\Lumen\Testing\DatabaseMigrations;
-use Laravel\Lumen\Testing\DatabaseTransactions;
+use InvalidArgumentException;
+use TestCase;
 
+/** @covers \App\Services\ConverterService */
 class ConverterServiceTest extends TestCase {
 
     private $converter;
@@ -58,5 +60,12 @@ class ConverterServiceTest extends TestCase {
         $this->assertEquals( "3V", $this->converter->toDuosexagesimal( 243 ) );
         $this->assertEquals( "7j", $this->converter->toDuosexagesimal( 453 ) );
         $this->assertEquals( "3SG0", $this->converter->toDuosexagesimal( 925164 ) );
+    }
+
+    /** @test */
+    public function invalid_argument_exception_for_invalid_duosexagesimal() {
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->converter->toDec( "___" );
     }
 }

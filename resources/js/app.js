@@ -25,7 +25,14 @@ if ( form ) {
 
             return res.json()
         } ).then( res => {
-            const { shorten, hash, url, visits, created_at: createdAt, hidden } = res[ "url" ]
+            const {
+                duosexagesimal_id: duosexagesimalId,
+                shorten_url: shortenURL,
+                original_url: originalURL,
+                visits,
+                created_at: createdAt,
+                hidden
+            } = res[ "link" ]
 
             const previous = document.querySelector( '.new-url' )
             if ( previous ) {
@@ -35,7 +42,7 @@ if ( form ) {
             if ( hidden ) {
                 Swal.fire( {
                     title: 'Successful!',
-                    html: '<a href="' + shorten + '">' + shorten + '</a><input id="shorten" class="visually-hidden-focusable" type="text" value="' + shorten + '"/>',
+                    html: '<a href="' + shortenURL + '">' + shortenURL + '</a><input class="to-clipboard visually-hidden-focusable" type="text" value="' + shortenURL + '"/>',
                     icon: 'success',
                     allowOutsideClick: false,
                     showCancelButton: true,
@@ -43,7 +50,7 @@ if ( form ) {
                     confirmButtonText: 'Copy'
                 } ).then( e => {
                     if ( e.isConfirmed ) {
-                        const shorten = document.querySelector( '#shorten' )
+                        const shorten = document.querySelector( '.to-clipboard' )
 
                         shorten.focus()
                         shorten.select()
@@ -53,28 +60,39 @@ if ( form ) {
                 } )
             } else {
 
-                const template = document.querySelector( '#templateUrl' )
-                template.content.querySelector( 'article' ).classList.add( "new-url" )
-                template.content.querySelector( '#hostUrl' ).innerHTML = ( new URL( url ) ).hostname
-                template.content.querySelector( '#hashUrl' ).innerHTML = hash
-                template.content.querySelector( '#createdAt' ).innerHTML = createdAt
-                template.content.querySelector( '#fullUrl' ).innerHTML = url
-                template.content.querySelector( '#fullUrl' ).href = url
-                template.content.querySelector( '#shortenUrl' ).innerHTML = shorten
-                template.content.querySelector( '#shortenUrl' ).href = shorten
-                template.content.querySelector( '#visitsText' ).innerHTML = visits
+                const template = document.querySelector( '#templateEntry' )
+                template.content.querySelector( '.entry' ).classList.add( "new-url" )
+                template.content.querySelector( '.hostname' ).innerHTML = ( new URL( originalURL ) ).hostname
+                template.content.querySelector( '.duosexagesimal-id' ).innerHTML = duosexagesimalId
+                template.content.querySelector( '.created-at' ).innerHTML = createdAt
 
-                const urls = document.querySelector( '#urls' )
-                if ( urls ) {
-                    urls.prepend( template.content.cloneNode( true ) )
-                    urls.removeChild( urls.lastElementChild )
+                template.content.querySelector( '.original-url' ).innerHTML = originalURL
+                template.content.querySelector( '.original-url' ).href = originalURL
+
+                template.content.querySelector( '.shorten-url' ).innerHTML = shortenURL
+                template.content.querySelector( '.shorten-url' ).href = shortenURL
+
+                template.content.querySelector( '.visits-counter' ).innerHTML = visits
+
+
+                const entries = document.querySelector( '#entries' )
+                if ( entries ) {
+                    entries.prepend( template.content.cloneNode( true ) )
+                }
+
+                if ( entries && entries.children.length > 10 ) {
+                    entries.removeChild( entries.lastElementChild )
+                }
+
+                const noEntries = document.querySelector( '#noEntries' )
+                if ( noEntries ) {
+                    noEntries.remove();
                 }
             }
 
             document.querySelector( '[name=url]' ).value = ""
         } ).catch( e => {
             console.log( e )
-
             Swal.fire( {
                 title: 'Something went wrong!',
                 text: 'Please make sure the link is correct and try again.',

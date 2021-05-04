@@ -2,37 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ConverterService;
 use App\Models\ShortLink;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Validation\Validator;
 
 class DashboardController extends Controller {
 
     public function index() {
-        $urls = ShortLink::where( 'hidden', '0' )->orderBy( 'created_at', 'desc' )->paginate( 10 );
+        $links = ShortLink::where( 'hidden', '0' )->orderBy( 'created_at', 'desc' )->paginate( 10 );
 
-        return view( 'pages.home', [ "urls" => $urls ] );
+        return view( 'pages.dashboard', [ "links" => $links ] );
     }
 
     public function store( Request $request ) {
         $this->validate( $request, [
             "url" => [ "required", "url" ],
-            "hidden" => [ "nullable" ]
+            "hidden" => [ "nullable", "boolean" ]
         ] );
 
-        $url = ShortLink::make( [
-            "url" => $request->get( "url" ),
-            "hidden" => $request->get( "hidden" )
-        ] );
+        $link = new ShortLink;
+        $link->original_url = $request->get( "url" );
+        $link->hidden = $request->get( "hidden" ) ?? false;
+        $link->visits = 0;
 
         $latest = ShortLink::latest( 'created_at' )->first();
         if ( $latest ) {
-            $url->id = $latest->id + rand( 1, 100 );
-            $url->save();
+            $link->id = $latest->id + rand( 2, 100 );
         }
 
-        return response()->json([ "url" => ShortLink::find( $url->id )->append(["shorten", "hash"]) ], 201);
+        $link->save();
+
+        return response()->json([
+            "link" => $link->append(["duosexagesimal_id", "shorten_url"])
+        ], 201);
     }
 }

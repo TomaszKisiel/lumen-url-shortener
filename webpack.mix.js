@@ -21,3 +21,7 @@ mix.sass( 'resources/sass/style.scss', 'css/style.css' )
             "vendor/illuminate/pagination/resources/views/bootstrap-4.blade.php"
         ],
     });
+
+if ( ! mix.inProduction() ) {
+    mix.browserSync( 'us.tkisiel.dev:8000' );
+}

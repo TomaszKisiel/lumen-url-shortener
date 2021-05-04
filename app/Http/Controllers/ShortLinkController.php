@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ConverterService;
 use App\Models\ShortLink;
+use App\Services\ConverterService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Validation\Validator;
 
 class ShortLinkController extends Controller {
 
@@ -16,25 +15,25 @@ class ShortLinkController extends Controller {
         $this->converter = $converter;
     }
 
-    public function __invoke( Request $request, string $hash ) {
-        $request->request->add( [ "hash" => $hash ] );
+    public function __invoke( Request $request, string $link ) {
+        $request->request->add( [ "short_link" => $link ] );
 
         try {
             $this->validate( $request, [
-                "hash" => [ "required", "alpha_num" ]
+                "short_link" => [ "required", "alpha_num" ]
             ] );
         } catch ( ValidationException $e ) {
             return abort( 404 );
         }
 
-        $url = ShortLink::find( $this->converter->toDec( $hash ) );
-        if ( ! $url ) {
+        $link = ShortLink::find( $this->converter->toDec( $link ) );
+        if ( ! $link ) {
             return abort( 404 );
         }
 
-        $url->increment('visits');
-        $url->save();
+        $link->increment('visits');
+        $link->save();
 
-        return redirect( $url->url );
+        return redirect( $link->original_url );
     }
 }
