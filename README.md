@@ -1,6 +1,6 @@
 # Lumen URL Shortener
 
-Lumen based URL Shortener for your own use. Deploy repositery on your server, set environment configs, migrate databes and shorten your links.
+Lumen based URL Shortener for your own use. Deploy repositery on your server, set environment configs, migrate database and shorten your links.
 
 ## Quickstart
 
