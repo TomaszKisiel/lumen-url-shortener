@@ -1,8 +1,8 @@
-# Lumen URL Shortener
+# :link: Lumen URL Shortener
 
 Lumen based URL Shortener for your own use. Deploy repositery on your server, set environment configs, migrate database and shorten your links.
 
-## Quickstart
+## :rabbit: Quickstart
 
 Clone this repository on your server.
 
@@ -24,7 +24,7 @@ Compile styles and scripts for production.
 npx mix --production
 ```
 
-## Authentication [WIP]
+## :lock: Authentication [WIP]
 
 If you want to use this software under your own domain and protect dashboard from undesirable use you can set this lines in environment config.
 
@@ -41,6 +41,6 @@ You can also create multiple password by separating them with comma.
 APP_PASSWORD="password_1","password_2"
 ```
 
-## License
+## :clipboard: License
 
 Open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
