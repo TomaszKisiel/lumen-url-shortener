@@ -16,7 +16,7 @@ Migrate database.
 php artisan migrate
 ```
 
-Duplicate ```.env.example``` and change their name to ```.env```. Set this file depend on your server settings.
+Duplicate ```.env.example``` and rename it to ```.env```. Set this file depend on your server settings.
 Remember to add ```APP_KEY``` which is basically 32 chars length random string.
 
 Compile styles and scripts for production.
