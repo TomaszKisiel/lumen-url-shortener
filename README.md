@@ -24,7 +24,7 @@ Compile styles and scripts for production.
 npx mix --production
 ```
 
-## Authentication
+## Authentication [WIP]
 
 If you want to use this software under your own domain and protect dashboard from undesirable use you can set this lines in environment config.
 
