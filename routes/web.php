@@ -13,16 +13,15 @@
 |
 */
 
-$router->get('/c/{dec}', \ConverterController::class);
+$router->get( '/{hash}', \ShortLinkController::class );
+$router->post( '/{hash}', \ShortLinkController::class );
+$router->put( '/{hash}', \ShortLinkController::class );
+$router->patch( '/{hash}', \ShortLinkController::class );
+$router->delete( '/{hash}', \ShortLinkController::class );
+$router->head( '/{hash}', \ShortLinkController::class );
+$router->options( '/{hash}', \ShortLinkController::class );
 
-$router->get('/{hash}', \UrlController::class );
-$router->post('/{hash}', \UrlController::class );
-$router->put('/{hash}', \UrlController::class );
-$router->patch('/{hash}', \UrlController::class );
-$router->delete('/{hash}', \UrlController::class );
-$router->head('/{hash}', \UrlController::class );
-$router->options('/{hash}', \UrlController::class );
+$router->get( '/', 'HomeController@index' );
+$router->post( '/', 'HomeController@store' );
 
-$router->get('/', 'HomeController@index' );
-$router->post('/', 'HomeController@store' );
 

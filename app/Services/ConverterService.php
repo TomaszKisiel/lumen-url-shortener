@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Actions;
+namespace App\Services;
 
 /**
  * Czterocyfrowe skróty skończą się po ZZZZ ( 14_776_335 )
@@ -10,21 +10,21 @@ namespace App\Actions;
  * Class UrlConverter
  * @package App\Actions
  */
-class UrlConverter {
+class ConverterService {
 
     public function toDec( $hash ) {
         $result = 0;
 
         $power = 0;
         foreach ( str_split( strrev( $hash ) ) as $digit ) {
-            $result += $this->convert62( $digit ) * pow( 62, $power );
+            $result += $this->convertDuosexagesimal( $digit ) * pow( 62, $power );
             $power++;
         }
 
         return $result;
     }
 
-    public function toHash( $dec ) {
+    public function toDuosexagesimal( $dec ) {
         $result = "";
 
         do {
@@ -37,7 +37,7 @@ class UrlConverter {
         return $result;
     }
 
-    protected function convertDec( $num ) {
+    private function convertDec( $num ) {
         if ( $num < 10 ) {
             return strval( $num );
         }
@@ -53,7 +53,7 @@ class UrlConverter {
         return "";
     }
 
-    protected function convert62( $num ) {
+    private function convertDuosexagesimal( $num ) {
         if ( is_numeric( $num ) ) {
             return intval( $num );
         }

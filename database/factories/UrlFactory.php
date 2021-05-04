@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Url;
+use App\Models\ShortLink;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UrlFactory extends Factory
@@ -12,7 +12,7 @@ class UrlFactory extends Factory
      *
      * @var string
      */
-    protected $model = Url::class;
+    protected $model = ShortLink::class;
 
     /**
      * Define the model's default state.

@@ -51,14 +51,6 @@
                         </div>
                     </div>
                 </form>
-                <div id="status"></div>
-                @if(false)
-                    {{-- Po utworzeniu nowego shorta --}}
-                    <hr>
-                    <div>
-                        asdsadsa das dsa
-                    </div>
-                @endif
             </div>
         </section>
         <section class="pt-1">
@@ -75,7 +67,7 @@
                                 <div class="col">
                                     <div class="badge bg-dark">{{ parse_url($url->url)['host'] }}</div>
                                     &rarr;
-                                    <div class="badge bg-success">{{ $url->hash }}</div>
+                                    <div class="badge bg-success">{{ $url->duosexagesimalId }}</div>
                                 </div>
                                 <div class="col text-end">
                                     <button type="button" class="btn btn-outline-secondary btn-sm" disabled="disabled">

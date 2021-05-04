@@ -24,23 +24,6 @@ Compile styles and scripts for production.
 npx mix --production
 ```
 
-## :lock: Authentication [WIP]
-
-If you want to use this software under your own domain and protect dashboard from undesirable use you can set this lines in environment config.
-
-```
-APP_PROTECTION=true
-APP_PASSWORD="your_password"
-```
-
-After this only users authenticated by this password will be able to use your app.
-
-You can also create multiple password by separating them with comma.
-
-```
-APP_PASSWORD="password_1","password_2"
-```
-
 ## :clipboard: License
 
 Open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

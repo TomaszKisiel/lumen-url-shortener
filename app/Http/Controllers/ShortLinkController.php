@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\UrlConverter;
-use App\Models\Url;
+use App\Services\ConverterService;
+use App\Models\ShortLink;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Validator;
 
-class UrlController extends Controller {
+class ShortLinkController extends Controller {
 
     private $converter;
 
-    public function __construct( UrlConverter $converter ) {
+    public function __construct( ConverterService $converter ) {
         $this->converter = $converter;
     }
 
@@ -27,7 +27,7 @@ class UrlController extends Controller {
             return abort( 404 );
         }
 
-        $url = Url::find( $this->converter->toDec( $hash ) );
+        $url = ShortLink::find( $this->converter->toDec( $hash ) );
         if ( ! $url ) {
             return abort( 404 );
         }

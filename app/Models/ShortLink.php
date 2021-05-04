@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use App\Actions\UrlConverter;
+use App\Services\ConverterService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Url extends Model {
+class ShortLink extends Model {
 
     use HasFactory;
 
@@ -23,12 +23,12 @@ class Url extends Model {
         'created_at' => 'datetime:Y-m-d H:i:s'
     ];
 
-    public function getHashAttribute( ) {
-        return ( new UrlConverter() )->toHash( $this->id );
+    public function getDuosexagesimalIdAttribute( ) {
+        return ( new ConverterService() )->toDuosexagesimal( $this->id );
     }
 
     public function getShortenAttribute( ) {
-        return config('app.url' ) . '/' . ( new UrlConverter() )->toHash( $this->id );
+        return config('app.url' ) . '/' . ( new ConverterService() )->toDuosexagesimal( $this->id );
     }
 
 }
