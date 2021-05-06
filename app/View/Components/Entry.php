@@ -5,6 +5,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
+/** @codeCoverageIgnore */
 class Entry extends Component {
 
 
